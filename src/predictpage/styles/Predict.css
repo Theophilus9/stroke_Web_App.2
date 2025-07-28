@@ -1,0 +1,42 @@
+.predict-header {
+    flex: 0 0 5%;
+}
+.predict-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-color: #ffffff;
+}
+
+.predict-body {
+    display: flex;
+    flex-direction: row;
+    flex: 90%;
+    justify-content: center;
+    align-items: center;
+}
+.img-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+.predict-footer {
+    flex: 0 0 9.25%;
+}
+.predict-form {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border: 1px solid #442b2b;
+}
+

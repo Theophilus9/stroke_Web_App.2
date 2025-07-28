@@ -1,0 +1,45 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+  padding: 12px 24px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.app-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #222;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+
+.navbar-right a {
+  margin-left: 30px;
+  padding: 5px;
+  text-decoration: none;
+  color: #333;
+  font-size: 1.3rem;
+  font-weight: 550;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  transition: color 0.5s ease;
+}
+
+.navbar-right a:hover {
+  color: #007bff;
+  text-decoration: underline;
+}

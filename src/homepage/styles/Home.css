@@ -1,0 +1,23 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(199, 99, 99);
+}
+
+/* No need to set flex or fixed height again */
+.navbar-section {
+  background-color: #ffffff;
+  flex: 5%;
+}
+
+.body-section {
+  background-color: #C6EAFA;
+  flex: 90%;
+}
+
+.footer-section {
+  background-color: #ffffff;
+  flex: 10%;
+}
