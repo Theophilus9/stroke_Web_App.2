@@ -37,6 +37,11 @@ img {
     align-items: center;
     height: 100%;
     width: 100%;
-    border: 1px solid #442b2b;
+}
+
+@media (max-width: 768px) {
+    .img-container {
+    display: none;
+  }
 }
 
