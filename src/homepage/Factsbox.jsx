@@ -3,6 +3,9 @@ import './styles/Factsbox.css';
 
 const facts = [
     "Strokes can happen at any age, even in children.",
+    "FAST: Face drooping, Arm weakness, Speech difficulty, Time to call emergency.",
+    "Strokes can happen at any age, even in children.",
+    "FAST: Face drooping, Arm weakness, Speech difficulty, Time to call emergency.",
     "FAST: Face drooping, Arm weakness, Speech difficulty, Time to call emergency."
 ];
 

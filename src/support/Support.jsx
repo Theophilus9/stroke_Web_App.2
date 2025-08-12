@@ -6,6 +6,7 @@ const Support = () => {
     return (
         <div className="support-container">
             <Navbar />
+            
         </div>
     )
 }
