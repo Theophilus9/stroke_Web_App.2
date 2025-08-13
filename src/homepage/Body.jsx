@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles/Body.css'
-import Factsbox from  './factsbox';
+import Factsbox from  './Factsbox';
 
 const Body = () => {
     return (
