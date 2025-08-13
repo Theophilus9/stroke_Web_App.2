@@ -62,17 +62,17 @@ const PredictionForm = () => {
         setPredictionResult(data.result);
         Swal.fire({
         title: `Hello ${username}!`,
-        text: `Your stroke risk prediction is: ${data.result}`,
+        text: ` ${data.result}`,
         icon: 'info',
         confirmButtonColor: '#683ddfff',
         confirmButtonText: 'Okay'
       });
       } else if (data.error) {
         setPredictionResult("Error: " + data.error);
-        alert(`${username}, there was an error with your prediction: ${data.error}`);
+        alert(`sorry ${username}, there was an error with your prediction: ${data.error}`);
       } else {
         setPredictionResult("Unexpected response");
-        alert(`${username}, there was an unexpected response from the server.`);
+        alert(`sorry ${username}, there was an unexpected response from the server.`);
       }
 
     } catch (error) {

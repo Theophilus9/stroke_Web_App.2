@@ -45,7 +45,7 @@ def predict():
 
         # Predict
         prediction = model.predict(input_encoded)[0]
-        result = "Stroke Risk Detected" if prediction == 1 else "No Stroke Risk"
+        result = "Stroke Risk Detected" if prediction == 1 else "No Stroke Risk Dtetected"
 
 
         # Just return a test message to confirm connection
