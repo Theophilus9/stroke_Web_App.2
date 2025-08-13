@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles/PredictionForm.css';
+import './styles/Predictionform.css';
 import Swal from 'sweetalert2';
 
 
