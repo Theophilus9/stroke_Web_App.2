@@ -100,12 +100,24 @@ input::placeholder {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .row-one,
   .row-two,
   .row-three,
   .row-four,
   .form-buttons {
     flex-direction: column;
+    align-items: stretch;
+  }
+  .prediction-form input{
+    height: 3rem;
+  }
+  .prediction-form select{
+    height: 3rem;
+  }
+  .form-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    height: 3rem;
   }
 }

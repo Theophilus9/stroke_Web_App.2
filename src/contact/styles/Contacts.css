@@ -11,5 +11,13 @@
     justify-content: center;
     gap: 3rem;
     background: linear-gradient(to right, #0a0f1c, #212d45);
+}
 
+@media (max-width: 600px){
+    .contacts-content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
 }

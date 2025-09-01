@@ -76,3 +76,30 @@ h2{
   font-family: 'Poppins', 'Segoe UI', sans-serif;
 }
 
+@media (max-width: 600px){
+    .contact-card {
+        width: 80%;
+        height: auto;
+    }
+    .contact-img {
+        width: 70%;
+        height: auto;
+    }
+    .contact-details {
+        width: 100%;
+        height: auto;
+        font-size: 1.5rem;
+    }
+    .contact-details h2{
+        font-size: 1.8rem;
+    }
+   
+    .button {
+        margin-top: 1rem;
+        width: 100%;
+        height: 3.5rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+}

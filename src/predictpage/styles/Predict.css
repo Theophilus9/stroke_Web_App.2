@@ -39,9 +39,12 @@
     width: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px){
     .img-container {
     display: none;
+  }
+  .predict-form{
+    width: 100%;
   }
 }
 
