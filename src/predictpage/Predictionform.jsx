@@ -127,7 +127,6 @@ const PredictionForm = () => {
               checked={formData.gender === 'Male'}
               onChange={handleChange}
               />
-            <label>Male</label>
           </div>
           <div className="female_part">
               <input
@@ -137,7 +136,6 @@ const PredictionForm = () => {
               checked={formData.gender === 'Female'}
               onChange={handleChange}
               />
-              <label>Female</label>
           </div>
         </div>
       </div>
