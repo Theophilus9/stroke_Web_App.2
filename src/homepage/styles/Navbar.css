@@ -53,8 +53,11 @@
   }
 
   .navbar-right {
-    width: 100%;
-    justify-content: space-between;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
   }
   .navbar-left {
     display: none;

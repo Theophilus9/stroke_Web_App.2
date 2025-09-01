@@ -99,6 +99,21 @@ input::placeholder {
   color: #6c6c6c; /* Light grey */
 }
 
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  z-index: 9999;
+}
+
+
 /* Responsive */
 @media (max-width: 600px) {
   .row-one,
@@ -111,6 +126,11 @@ input::placeholder {
   }
   .username-selection input, .age-selection input, .bmi-selection input, .avg-glucose-level-selection input{
     height: 3rem;
+  }
+  .gender-selection{
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
   }
   .prediction-form select {
     height: 3rem;

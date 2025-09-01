@@ -21,6 +21,7 @@ const PredictionForm = () => {
   const [username, setUsername] = useState('');
   const [predictionResult, setPredictionResult] = useState('');
   const [showBMIModal, setShowBMIModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -35,6 +36,7 @@ const PredictionForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     // Convert to correct types
     const payload = {
@@ -66,6 +68,7 @@ const PredictionForm = () => {
 
       if (data.result) {
         setPredictionResult(data.result);
+        setLoading(false);
         Swal.fire({
         title: `Hello ${username}!`,
         text: ` ${data.result}`,
@@ -264,13 +267,11 @@ const PredictionForm = () => {
         <button type="submit">Predict</button>
       </div>
     </form>
-
-    {/* {predictionResult && (
-      <div className="result-box">
-        <h3>Prediction Result:</h3>
-        <p>{predictionResult}</p>
-      </div>
-    )} */}
+    {loading && (
+    <div className="loading-overlay">
+      <p>Loading prediction...</p>
+    </div>
+    )}
     
   </div>
 );
