@@ -53,7 +53,7 @@ const PredictionForm = () => {
     try {
       console.log("Payload being sent:", payload);
 
-      const response = await fetch('http://localhost:5000/predict', {
+      const response = await fetch('https://stroke-web-app-2-backend-1.onrender.com/predict', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
