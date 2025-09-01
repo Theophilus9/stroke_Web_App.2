@@ -118,6 +118,7 @@ input::placeholder {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
   
 }
 .female_part{
@@ -126,6 +127,7 @@ input::placeholder {
   align-items: center;
   justify-content: center;
   margin-left:1rem;
+  gap: 1rem;
 }
 
 .male_part label, .female_part label {
