@@ -6,14 +6,18 @@ const BMIModal = ({ isOpen, onClose, onSave }) => {
   const [height, setHeight] = useState("");
   const [bmi, setBmi] = useState(null);
 
-  const calculateBMI = () => {
-    if (weight > 0 && height > 0) {
-      const h = height / 100; // convert cm to m
-      const result = (weight / (h * h)).toFixed(2);
-      setBmi(result);
-      onSave(result); // send BMI to parent (PredictionForm)
-    }
-  };
+const calculateBMI = () => {
+  const w = parseFloat(weight);
+  const h = parseFloat(height) / 100; // convert cm to m
+
+  if (w > 0 && h > 0) {
+    const result = w / (h * h); // BMI formula
+    const rounded = Number(result.toFixed(2)); // convert back to number
+    setBmi(rounded);
+    onSave(rounded); // make sure parent gets a number, not a string
+  }
+};
+
 
   if (!isOpen) return null;
   console.log("BMIModal mounted ✅");
