@@ -113,14 +113,18 @@ input::placeholder {
   z-index: 9999;
 }
 
-.male_part, .female_part {
+.male_part {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  
 }
-.female_part input{
+.female_part{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   margin-left:1rem;
 }
 
@@ -147,7 +151,7 @@ input::placeholder {
   .gender-selection{
     display: flex;
     flex-direction: row;
-    gap: 3rem;
+    gap: 2rem;
   }
   .prediction-form select {
     height: 3rem;
