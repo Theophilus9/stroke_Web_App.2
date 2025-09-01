@@ -120,6 +120,7 @@ const PredictionForm = () => {
         <div className="gender-selection">
           <label>Gender:</label>
           <div className="male_part">
+              <label>Male</label>
               <input 
               type="radio"
               name="gender"
@@ -129,6 +130,7 @@ const PredictionForm = () => {
               />
           </div>
           <div className="female_part">
+              <label>Female</label>
               <input
               type="radio"
               name="gender"

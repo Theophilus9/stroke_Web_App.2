@@ -161,4 +161,21 @@ input::placeholder {
     align-items: stretch;
     height: 3rem;
   }
+
+  .male_part {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  
+}
+.female_part{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  margin-left:1rem;
+}
 }
