@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./styles/BMIModal.css"; // optional, for modal styling
 
 const BMIModal = ({ isOpen, onClose, onSave }) => {
@@ -18,11 +18,11 @@ const BMIModal = ({ isOpen, onClose, onSave }) => {
     } else {
       setBmi(null); // reset if inputs are invalid
     }
-  }, [weight, height, onSave]);
-
+  }, [weight, height, onSave]); // re-run whenever weight/height changes
 
   if (!isOpen) return null;
   console.log("BMIModal mounted ✅");
+
   return (
     <div className="bmi-modal-overlay">
       <div className="bmi-modal-content">
@@ -43,7 +43,7 @@ const BMIModal = ({ isOpen, onClose, onSave }) => {
             onChange={(e) => setHeight(e.target.value)}
           />
         </div>
-        <button onClick={calculateBMI}>Calculate</button>
+
         {bmi && <p>Your BMI: {bmi}</p>}
         <button onClick={onClose}>Close</button>
       </div>
