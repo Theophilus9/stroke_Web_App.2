@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './styles/Predictionform.css';
 import Swal from 'sweetalert2';
+import BMIModal from "./BMIModal"; 
 
 
 const PredictionForm = () => {
@@ -19,12 +20,17 @@ const PredictionForm = () => {
 
   const [username, setUsername] = useState('');
   const [predictionResult, setPredictionResult] = useState('');
+  const [showBMIModal, setShowBMIModal] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleBMISave = (bmiValue) => {
+    setFormData({ ...formData, bmi: bmiValue });
   };
 
   const handleSubmit = async (e) => {
@@ -39,8 +45,8 @@ const PredictionForm = () => {
       ever_married: formData.ever_married,
       work_type: formData.work_type,
       Residence_type: formData.Residence_type,
-      avg_glucose_level: parseFloat(formData.avg_glucose_level),
-      bmi: parseFloat(formData.bmi),
+      avg_glucose_level: parseFloat(formData.avg_glucose_level || 105.94,),
+      bmi: parseFloat(formData.bmi || 28.49,),
       smoking_status: formData.smoking_status
    };
 
@@ -185,7 +191,7 @@ const PredictionForm = () => {
             value={formData.avg_glucose_level}
             onChange={handleChange}
             placeholder="Glucose level"
-            required
+            title="Default is 105.94"
           />
         </div>
 
@@ -194,12 +200,23 @@ const PredictionForm = () => {
             type="number"
             name="bmi"
             value={formData.bmi}
-            onChange={handleChange}
-            placeholder="BMI"
-            required
+            onClick={() => {
+              console.log("BMI field clicked");
+              setShowBMIModal(true)}}
+            placeholder="Click to calculate BMI"
+            readOnly
+            title="Default is 28.49"
           />
         </div>
       </div>
+      <BMIModal
+        isOpen={showBMIModal}
+        onClose={() => setShowBMIModal(false)}
+        onSave={(bmiValue) => {
+          setFormData({ ...formData, bmi: bmiValue });
+          setShowBMIModal(false);
+        }}
+      />
 
       <div className="smoking-status-selection">
         <select
