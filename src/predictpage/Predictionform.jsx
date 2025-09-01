@@ -119,29 +119,25 @@ const PredictionForm = () => {
       <div className="row-two">
         <div className="gender-selection">
           <label>Gender:</label>
-          <div>
-          <label>
-            <input
+          <div className="male_part">
+              <input 
               type="radio"
               name="gender"
               value="Male"
               checked={formData.gender === 'Male'}
               onChange={handleChange}
-            />
-            Male
-          </label>
+              />
+            <label>Male</label>
           </div>
-          <div>
-          <label>
-            <input
+          <div className="female_part">
+              <input
               type="radio"
               name="gender"
               value="Female"
               checked={formData.gender === 'Female'}
               onChange={handleChange}
-            />
-            Female
-          </label>
+              />
+              <label>Female</label>
           </div>
         </div>
       </div>

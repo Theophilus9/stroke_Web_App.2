@@ -113,6 +113,23 @@ input::placeholder {
   z-index: 9999;
 }
 
+.male_part, .female_part {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.female_part input{
+  margin-left:1rem;
+}
+
+.male_part label, .female_part label {
+  margin: 0;
+  font-size: 16px; 
+}
+
+
 
 /* Responsive */
 @media (max-width: 600px) {
