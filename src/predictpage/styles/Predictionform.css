@@ -109,10 +109,10 @@ input::placeholder {
     flex-direction: column;
     align-items: stretch;
   }
-  .prediction-form input{
+  .username-selection input, .age-selection input, .bmi-selection input, .avg-glucose-level-selection input{
     height: 3rem;
   }
-  .prediction-form select{
+  .prediction-form select {
     height: 3rem;
   }
   .form-buttons {

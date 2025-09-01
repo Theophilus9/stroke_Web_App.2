@@ -18,9 +18,7 @@ const Predict = () => {
                     <Predictionform />
                 </div>
             </div>
-            <div className='predict-footer'>
-                <Foot />
-            </div>
+            
         </div>
     )
 }

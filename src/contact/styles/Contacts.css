@@ -15,9 +15,12 @@
 
 @media (max-width: 600px){
     .contacts-content{
+        width: 100%;
+        height: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 1.5rem;
+        width: 100%;
     }
 }
