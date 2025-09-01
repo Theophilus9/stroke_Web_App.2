@@ -6,17 +6,19 @@ const BMIModal = ({ isOpen, onClose, onSave }) => {
   const [height, setHeight] = useState("");
   const [bmi, setBmi] = useState(null);
 
-const calculateBMI = () => {
-  const w = parseFloat(weight);
-  const h = parseFloat(height) / 100; // convert cm to m
+  useEffect(() => {
+    const w = parseFloat(weight);
+    const h = parseFloat(height) / 100; // convert cm → m
 
-  if (w > 0 && h > 0) {
-    const result = w / (h * h); // BMI formula
-    const rounded = Number(result.toFixed(2)); // convert back to number
-    setBmi(rounded);
-    onSave(rounded); // make sure parent gets a number, not a string
-  }
-};
+    if (w > 0 && h > 0) {
+      const result = w / (h * h); // BMI formula
+      const rounded = Number(result.toFixed(2));
+      setBmi(rounded);
+      onSave(rounded); // update parent whenever BMI changes
+    } else {
+      setBmi(null); // reset if inputs are invalid
+    }
+  }, [weight, height, onSave]);
 
 
   if (!isOpen) return null;
