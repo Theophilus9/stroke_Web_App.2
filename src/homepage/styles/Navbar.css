@@ -49,6 +49,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0px;
     height: 6rem;
   }
 
@@ -56,15 +57,21 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    align-items: center;
+    gap: 0.5rem;
     text-align: center;
+  }
+  .navbar-right a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.8rem;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
   }
   .navbar-left {
     display: none;
-  }
-
-  .navbar-right a {
-    margin-left: 15px;
-    font-size: 1.8rem;
   }
 }
