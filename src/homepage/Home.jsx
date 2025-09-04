@@ -13,9 +13,6 @@ const Home = () => {
             <div className="body-section">
                 <Body />            
             </div>
-            <div className="footer-section">
-                <Foot />
-            </div>
         </div>
     );
 };

@@ -17,11 +17,6 @@
   flex: 90%;
 }
 
-.footer-section {
-  background-color: #ffffff;
-  flex: 10%;
-}
-
 @media (max-width: 768px) {
   
 }
