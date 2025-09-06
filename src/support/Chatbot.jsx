@@ -12,7 +12,6 @@ const ChatBot = () => {
 
   const toggleChat = () => setIsOpen(!isOpen);
 
-  // Auto-scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -20,40 +19,43 @@ const ChatBot = () => {
   const handleSend = async () => {
     if (!input.trim() || loading) return;
 
-    // Add user message
+    console.log("Sending message:", input);
     setMessages(prev => [...prev, { from: "user", text: input }]);
     setLoading(true);
 
     try {
-      // Replace with your Hugging Face token
-      const HUGGING_FACE_API_TOKEN = import.meta.env.VITE_HF_TOKEN;
-      const HUGGING_FACE_MODEL = "meta-llama/Llama-2-7b-chat-hf";
+      const token = import.meta.env.VITE_HF_TOKEN;
+      console.log("Using Hugging Face token:", token ? "FOUND" : "MISSING");
+      const model = "google/flan-t5-small";
+      console.log("Sending request to model:", model);
+
+      // Timeout controller to prevent hanging
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
 
       const response = await fetch(
-        `https://api-inference.huggingface.co/models/${HUGGING_FACE_MODEL}`,
+        `https://api-inference.huggingface.co/models/${model}`,
         {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${HUGGING_FACE_API_TOKEN}`,
+            "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
             inputs: `User: ${input}\nAssistant:`,
-            parameters: { max_new_tokens: 200 }
-          })
+            parameters: { max_new_tokens: 150 }
+          }),
+          signal: controller.signal
         }
       );
 
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
-      }
+      clearTimeout(timeout);
 
+      if (!response.ok) throw new Error(`API error: ${response.status}`);
       const data = await response.json();
       console.log("Raw HF response:", data);
 
       let botReply = "Sorry, I didn't understand that.";
-
-      // Extract generated text (might vary depending on model)
       if (Array.isArray(data) && data[0]?.generated_text) {
         botReply = data[0].generated_text;
       } else if (data?.generated_text) {
@@ -61,6 +63,7 @@ const ChatBot = () => {
       }
 
       setMessages(prev => [...prev, { from: "bot", text: botReply }]);
+      console.log("Bot reply:", botReply);
     } catch (err) {
       console.error("Error fetching from Hugging Face:", err);
       setMessages(prev => [
@@ -69,9 +72,8 @@ const ChatBot = () => {
       ]);
     } finally {
       setLoading(false);
+      setInput("");
     }
-
-    setInput("");
   };
 
   const handleKeyPress = (e) => {
