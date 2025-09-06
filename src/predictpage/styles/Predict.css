@@ -1,21 +1,27 @@
-.predict-header {
-    flex: 0 0 5%;
-}
+/* Container for the entire predict page */
 .predict-container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    width: 100%;
     background-color: #ffffff;
+    box-sizing: border-box;
+    overflow-x: hidden; /* prevent horizontal scroll */
 }
 
+/* Main body with form and image */
 .predict-body {
     display: flex;
     flex-direction: row;
-    flex: 90%;
+    flex: 1;
     justify-content: center;
     align-items: center;
+    gap: 40px;
+    padding: 0px 20px;
+    box-sizing: border-box;
 }
+
+/* Image container */
 .img-container {
     flex: 1;
     display: flex;
@@ -25,27 +31,47 @@
 
 .img-container img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    object-fit: contain;
 }
-.predict-footer {
-    flex: 0 0 9.25%;
-}
+
+/* Form container */
 .predict-form {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
     width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
-@media (max-width: 600px){
+/* ------------------- RESPONSIVE ------------------- */
+
+/* Hide image and center form on smaller screens */
+@media (max-width: 1000px) {
+    .predict-body {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
     .img-container {
-    display: none;
-  }
-  .predict-form{
-    width: 100%;
-    margin-top: 0.5rem;
-  }
+        display: none; /* hide the image */
+    }
+
+    .predict-form {
+        width: 100%;
+        max-width: 500px; /* optional: constrain form width */
+        margin: 0 auto;
+        padding: 0;
+    }
 }
 
+/* Mobile screens (extra small) */
+@media (max-width: 600px) {
+    .predict-form {
+        padding: 0 10px;
+    }
+}

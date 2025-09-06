@@ -46,11 +46,6 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      {/* ✅ Navbar at the top */}
-      <div className="dashboard-header">
-        <Navbar />
-      </div>
-
       <div className="dashboard-body">
         <h2 className="dashboard-title">📊 Your Prediction History</h2>
         <div className="chart-wrapper">

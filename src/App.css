@@ -20,3 +20,11 @@ body, html, #root {
   display: flex;
   flex-direction: column;
 }
+
+/* App.css */
+.app-content {
+  padding-top: 70px; /* same as navbar height */
+  width: 100%;
+  min-height: calc(100vh - 70px);
+  box-sizing: border-box;
+}

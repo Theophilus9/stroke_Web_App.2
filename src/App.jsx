@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+// App.jsx
+import React from "react";
 import "./App.css";
+import Navbar from "./homepage/Navbar"; // import your Navbar
 import Home from "./homepage/Home";
 import Predict from "./predictpage/Predict";
 import Support from "./support/Support";
@@ -7,16 +9,16 @@ import Contacts from "./contact/Contacts";
 import Login from "./sign/Login";
 import Signup from "./sign/Signup";
 import Dashboard from "./dashboard/DashB";
-import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate, Outlet } from "react-router-dom";
 import { auth } from "./sign/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 // ProtectedRoute wrapper
 const ProtectedRoute = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
@@ -26,9 +28,21 @@ const ProtectedRoute = ({ children }) => {
 
   if (loading) return <p>Loading...</p>;
 
-  if (!user) return <Navigate to="/login" replace />; // redirect if not logged in
+  if (!user) return <Navigate to="/login" replace />; 
 
   return children;
+};
+
+// Layout component with Navbar and content container
+const Layout = () => {
+  return (
+    <>
+      <Navbar />
+      <div className="app-content">
+        <Outlet />
+      </div>
+    </>
+  );
 };
 
 const router = createBrowserRouter([
@@ -36,53 +50,19 @@ const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <Signup /> },
   {
-    path: "/home",
-    element: (
-      <ProtectedRoute>
-        <Home />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/predict",
-    element: (
-      <ProtectedRoute>
-        <Predict />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/support",
-    element: (
-      <ProtectedRoute>
-        <Support />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/contacts",
-    element: (
-      <ProtectedRoute>
-        <Contacts />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/dashboard",
-    element: (
-      <ProtectedRoute>
-        <Dashboard />
-      </ProtectedRoute>
-    ),
+    element: <ProtectedRoute><Layout /></ProtectedRoute>,
+    children: [
+      { path: "/home", element: <Home /> },
+      { path: "/predict", element: <Predict /> },
+      { path: "/support", element: <Support /> },
+      { path: "/contacts", element: <Contacts /> },
+      { path: "/dashboard", element: <Dashboard /> },
+    ],
   },
 ]);
 
 const App = () => {
-  return (
-    <div>
-      <RouterProvider router={router} />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;

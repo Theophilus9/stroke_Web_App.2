@@ -1,12 +1,11 @@
 import React from "react";
 import "./styles/Support.css";
 import Navbar from "../homepage/Navbar";
+import ChatBot from "./Chatbot.jsx";
 
 const Support = () => {
   return (
     <div className="support-container">
-      <Navbar />
-
       <div className="support-content">
         <h1>
           Psychological Care After Stroke: The Virtuous Cycle of a Holistic
@@ -110,10 +109,8 @@ const Support = () => {
             therapy or positive psychology, recovery can become a virtuous
             cycle of ongoing improvement.
           </p>
-          
         </div>
 
-        {/* New video section */}
         <div className="support-section">
           <h2>How to Quickly Identify a Stroke</h2>
           <p>
@@ -139,7 +136,9 @@ const Support = () => {
             ></iframe>
           </div>
         </div>
-              <p className="good-luck">Good luck!</p>
+
+        <p className="good-luck">Good luck!</p>
+
         <div className="external-link">
           <a
             href="https://www.stroke.org/en/life-after-stroke"
@@ -150,6 +149,9 @@ const Support = () => {
           </a>
         </div>
       </div>
+
+      {/* Floating ChatBot */}
+      <ChatBot />
     </div>
   );
 };

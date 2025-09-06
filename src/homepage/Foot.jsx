@@ -1,5 +1,4 @@
 import React from "react";
-import "./styles/Foot.css";
 
 const Foot = () => {
     return (

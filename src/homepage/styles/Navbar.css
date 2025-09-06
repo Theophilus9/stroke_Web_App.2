@@ -1,108 +1,165 @@
+/* Navbar.css */
+
+/* General navbar styling */
 .navbar {
+  width: 100%;
+  position: fixed; /* keeps navbar at top */
+  top: 0;
+  left: 0;
+  height: 70px; /* or whatever height you want */
+  background-color: #f8f9fa; /* light theme */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 100%;
-  padding: 12px 24px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 0 30px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 999; /* make sure it’s on top of everything */
 }
 
+
+/* Left section */
 .navbar-left {
   display: flex;
   align-items: center;
 }
 
 .logo {
-  width: 32px;
-  height: 32px;
-  margin-right: 20px;
-  margin-left: 20px;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
 }
 
 .app-name {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #222;
-  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
 }
 
-
-.navbar-right a {
-  margin-left: 30px;
-  padding: 5px;
-  text-decoration: none;
-  color: #333;
-  font-size: 1.3rem;
-  font-weight: 550;
-  font-family: 'Poppins', 'Segoe UI', sans-serif;
-  transition: color 0.5s ease;
+/* Right section - desktop links */
+.navbar-right {
+  display: flex;
+  align-items: center;
 }
 
-.navbar-right a:hover {
-  color: #007bff;
-  text-decoration: underline;
-}
-/*-----------------------------------------------------*/
-.logout-btn {
-  background: none;
-  border: none;
-  color: rgb(42, 29, 29);
-  font-size: 16px;
-  cursor: pointer;
-  margin-left: 20px;
-}
-
-.logout-btn:hover {
-  text-decoration: underline;
-}
-/*-----------------------------------------------------*/
 .nav-link {
-  margin-left: 30px;
-  padding: 5px;
+  margin-left: 20px;
   cursor: pointer;
-  font-size: 1.3rem;
-  color: #333;
-  font-weight: 550;
-  transition: color 0.3s ease;
+  transition: color 0.2s;
 }
 
 .nav-link:hover {
   color: #007bff;
-  text-decoration: underline;
+}
+
+.logout-btn {
+  margin-left: 20px;
+  padding: 5px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.logout-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Burger menu - hidden by default on desktop */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.burger div {
+  height: 3px;
+  width: 100%;
+  background-color: #333333;
+  border-radius: 2px;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 200px;
+  background-color: #ffffff;
+  border-left: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.mobile-menu .nav-link {
+  padding: 10px 20px;
+  margin: 0;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-menu .nav-link:last-child {
+  border-bottom: none;
+}
+
+/* Navbar adjustments for medium screens */
+.navbar {
+  min-height: 70px; /* slightly taller for medium screens */
+  padding: 0 25px;
+}
+
+/* App name adjustments */
+.app-name {
+  font-size: 20px;
+  line-height: 1.2;
+  white-space: nowrap; /* prevent breaking into two lines */
+}
+
+/* Get Started button adjustments */
+.logout-btn, .nav-link {
+  padding: 10px 16px; /* taller buttons */
+  font-size: 16px;
+}
+
+/* Ensure text stays vertically centered */
+.navbar-left, .navbar-right {
+  align-items: center;
+  display: flex;
 }
 
 
-
-
-@media (max-width: 600px) {
+/* Media query for medium screens */
+@media (max-width: 1050px) and (min-width: 601px) {
   .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0px;
-    height: 6rem;
+    min-height: 80px; /* more height to avoid text clipping */
+    padding: 0 20px;
   }
 
+  .app-name {
+    font-size: 18px; /* slightly smaller to fit better */
+  }
+
+  .logout-btn {
+    padding: 12px 18px; /* taller and wider button */
+  }
+
+  .nav-link {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+}
+
+/* Responsive: screens smaller than 600px */
+@media (max-width: 600px) {
   .navbar-right {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    text-align: center;
-  }
-  .navbar-right a{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 1.8rem;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-  }
-  .navbar-left {
     display: none;
   }
+  .burger {
+    display: flex;
+  }
 }
+
