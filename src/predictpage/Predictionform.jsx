@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import './styles/Predictionform.css';
 import Swal from 'sweetalert2';
 import BMIModal from "./BMIModal"; 
-
+import { supabase } from "../dashboard/supabaseClient";
+import { auth } from "../sign/firebase"; // still using Firebase login
 
 const PredictionForm = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +23,26 @@ const PredictionForm = () => {
   const [predictionResult, setPredictionResult] = useState('');
   const [showBMIModal, setShowBMIModal] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const savePrediction = async (data) => {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  const { result, probability } = data; // extract fields
+
+  const { error } = await supabase.from("predictions").insert([
+    {
+      user_id: user.uid,
+      prediction: result,     // string
+      probability: probability,   // number
+      timestamp: new Date().toISOString(),
+    },
+  ]);
+
+  if (error) console.error("Error saving prediction:", error);
+};
+
+
 
   const handleChange = (e) => {
     setFormData({
@@ -55,7 +76,7 @@ const PredictionForm = () => {
     try {
       console.log("Payload being sent:", payload);
 
-      const response = await fetch('https://stroke-web-app-2-backend-1.onrender.com/predict', {
+      const response = await fetch('http://127.0.0.1:5000/predict', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -69,6 +90,11 @@ const PredictionForm = () => {
       if (data.result) {
         setPredictionResult(data.result);
         setLoading(false);
+
+         // 🔹 Save result in Supabase
+        savePrediction(data);
+
+
         Swal.fire({
         title: `Hello ${username}!`,
         text: ` ${data.result}`,

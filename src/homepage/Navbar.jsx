@@ -27,6 +27,7 @@ const Navbar = () => {
         <span onClick={() => navigate("/predict")} className="nav-link">Predict</span>
         <span onClick={() => navigate("/support")} className="nav-link">Support</span>
         <span onClick={() => navigate("/contacts")} className="nav-link">Contacts</span>
+        <span onClick={() => navigate("/dashboard")} className="nav-link">Dashboard</span>
         <button onClick={handleLogout} className="logout-btn">Logout</button>
       </div>
     </nav>
