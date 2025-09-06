@@ -74,7 +74,7 @@ const PredictionForm = () => {
    };
 
     try {
-      console.log("Payload being sent:", payload);
+      console.log("Payload is being sent:", payload);
 
       const response = await fetch('https://stroke-web-app-2-backend-1.onrender.com/predict', {
         method: 'POST',
