@@ -78,14 +78,12 @@ const PredictionForm = () => {
 
       const response = await fetch('https://stroke-web-app-2-backend-1.onrender.com/predict', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
 
-      const data = await response.json();
-      console.log("Response from backend:", data); // optional debug log
+    const data = await response.json();
+    console.log("Response from backend:", data); // optional debug log
 
       if (data.result) {
         setPredictionResult(data.result);
