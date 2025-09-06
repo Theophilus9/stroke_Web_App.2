@@ -6,7 +6,7 @@ import Support from "./support/Support";
 import Contacts from "./contact/Contacts";
 import Login from "./sign/Login";
 import Signup from "./sign/Signup";
-import Dashboard from "./dashboard/dashboard";
+import Dashboard from "./dashboard/DashB";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import { auth } from "./sign/firebase";
 import { onAuthStateChanged } from "firebase/auth";
