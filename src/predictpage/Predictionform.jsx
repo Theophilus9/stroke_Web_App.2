@@ -36,26 +36,62 @@ const PredictionForm = () => {
       prediction: result,     // string
       probability: probability,   // number
       timestamp: new Date().toISOString(),
+      age: formData.age ? Number(formData.age) : null,
+      gender: formData.gender,
+      hypertension: formData.hypertension,
+      heart_disease: formData.heart_disease,
+      ever_married: formData.ever_married,
+      work_type: formData.work_type,
+      residence_type: formData.Residence_type,
+      avg_glucose_level: formData.avg_glucose_level ? Number(formData.avg_glucose_level) : null,
+      bmi: formData.bmi ? Number(formData.bmi) : null,
+      smoking_status: formData.smoking_status,
     },
   ]);
 
-  if (error) console.error("Error saving prediction:", error);
+  if (error) {
+    console.error("Error saving prediction:", error);
+  } else {
+    console.log("Prediction saved successfully!");
+  }
 };
 
 
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  const numValue = Number(value);
+
+  // Validate age
+  if (name === "age" && value !== "") {
+    if (isNaN(numValue) || numValue < 0 || numValue > 130) {
+      alert("Please enter a valid age between 0 and 130.");
+      return;
+    }
+  }
+
+  // Validate glucose level
+  if (name === "avg_glucose_level" && value !== "") {
+    if (isNaN(numValue) || numValue < 0) {
+      alert("Glucose level cannot be negative.");
+      return;
+    }
+  }
+  
+  setFormData({
+    ...formData,
+    [name]: value
+  });
+};
+
+
 
   const handleBMISave = (bmiValue) => {
     setFormData({ ...formData, bmi: bmiValue });
   };
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     setLoading(true);
 

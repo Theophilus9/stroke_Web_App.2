@@ -1,23 +1,64 @@
+/* Overlay background */
 .bmi-modal-overlay {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0,0,0,0.5);
-  display: flex; justify-content: center; align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1000;
+  padding: 10px; /* ensures content isn't touching edges on small screens */
 }
 
+/* Modal box */
 .bmi-modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  width: 300px;
+  background: #fff;
+  padding: 30px 25px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 360px; /* responsive max width */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
   text-align: center;
+  font-family: Arial, sans-serif;
 }
 
-.bmi-modal-overlay button{
-    width: 30%;
-    height: 30px;
-    margin: 2px;
-    margin-top: 5px;
+/* Modal heading */
+.bmi-modal-content h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Input fields */
+.bmi-modal-content input[type="number"] {
+  width: 90%;
+  padding: 8px 10px;
+  margin: 8px 0 15px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+/* Buttons */
+.bmi-modal-content button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  background-color: #683ddfff; /* your brand color */
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.bmi-modal-content button:hover {
+  background-color: #532ca8; /* darker shade on hover */
+}
+
+/* BMI display */
+.bmi-modal-content p {
+  font-weight: bold;
+  margin-top: 10px;
+  color: #444;
 }
