@@ -3,11 +3,11 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #ffb88c, #de6262);
+  background: linear-gradient(135deg, #74abe2, #5563de);
 }
 
 .signup-card {
-  width: 380px;
+  width: 350px;
   padding: 30px;
   border-radius: 12px;
   background: #fff;
@@ -26,7 +26,7 @@
 
 .form-group label {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   color: #333;
   font-weight: 500;
 }
@@ -45,7 +45,7 @@
   padding: 12px;
   border-radius: 8px;
   border: none;
-  background-color: #de6262;
+  background-color: #5563de;
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -53,18 +53,18 @@
 }
 
 .signup-btn:hover {
-  background-color: #c54e4e;
+  background-color: #3d4fb3;
 }
 
 .error-text {
   color: red;
-  margin-top: 12px;
+  margin-top: 10px;
   text-align: center;
 }
 
 .success-text {
   color: green;
-  margin-top: 12px;
+  margin-top: 10px;
   text-align: center;
 }
 
@@ -77,4 +77,30 @@
   color: blue;
   text-decoration: underline;
   cursor: pointer;
+}
+
+/* Password toggle */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.3s;
+}
+
+.password-toggle:hover {
+  opacity: 0.8;
 }

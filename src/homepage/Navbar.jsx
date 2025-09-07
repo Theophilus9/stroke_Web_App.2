@@ -45,16 +45,18 @@ const Navbar = () => {
       </div>
 
       {/* Mobile menu */}
+      {/* Mobile menu */}
       {showMobileMenu && (
-        <div className="mobile-menu">
-          <span onClick={() => navigate("/home")} className="nav-link">Home</span>
-          <span onClick={() => navigate("/predict")} className="nav-link">Predict</span>
-          <span onClick={() => navigate("/support")} className="nav-link">Support</span>
-          <span onClick={() => navigate("/contacts")} className="nav-link">Contacts</span>
-          <span onClick={() => navigate("/dashboard")} className="nav-link">Dashboard</span>
-          <span onClick={handleLogout} className="nav-link">Logout</span>
-        </div>
+      <div className="mobile-menu">
+        <span onClick={() => { navigate("/home"); setShowMobileMenu(false); }} className="nav-link">Home</span>
+        <span onClick={() => { navigate("/predict"); setShowMobileMenu(false); }} className="nav-link">Predict</span>
+        <span onClick={() => { navigate("/support"); setShowMobileMenu(false); }} className="nav-link">Support</span>
+        <span onClick={() => { navigate("/contacts"); setShowMobileMenu(false); }} className="nav-link">Contacts</span>
+        <span onClick={() => { navigate("/dashboard"); setShowMobileMenu(false); }} className="nav-link">Dashboard</span>
+        <span onClick={() => { handleLogout(); setShowMobileMenu(false); }} className="nav-link">Logout</span>
+      </div>
       )}
+
     </nav>
   );
 };

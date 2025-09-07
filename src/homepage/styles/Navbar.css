@@ -151,6 +151,12 @@
     padding: 10px 12px;
     font-size: 15px;
   }
+  .navbar-right {
+    display: none;
+  }
+  .burger {
+    display: flex;
+  }
 }
 
 /* Responsive: screens smaller than 600px */

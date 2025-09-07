@@ -30,19 +30,27 @@ body, html {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
   gap: 30px; /* spacing between heading, text, button, Factsbox */
-  padding: 0px 20px;
+  padding: 100px 20px 0 20px;
 }
 
 .Right-part {
-  flex: 1;
+  flex: 1.2; /* give right section slightly more space */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
 }
+
+.Right-part img {
+  width: 100%;
+  max-width: 600px; /* increase max-width */
+  height: auto;
+  object-fit: contain;
+}
+
+
 
 /* Headings and text */
 h1 {
@@ -101,26 +109,64 @@ p {
   object-fit: contain;
 }
 
+
 /* ------------------- RESPONSIVE ------------------- */
 
-/* Medium screens */
+/* Screens smaller than 1050px (including 1000px adjustments) */
 @media (max-width: 1050px) {
+  .left-section-bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  /* Heading adjustments */
   h1 {
     font-size: 2.5rem;
   }
 
+  /* Button adjustments */
   .start-button {
     padding: 16px 35px;
     min-width: 180px;
   }
 
+  /* Paragraph adjustments */
   p {
     font-size: 1.1rem;
   }
+
+  /* Additional: Hide image and center content for <1000px */
+  .Right-part {
+    display: none; /* hide the image */
+  }
+
+  .body-container {
+    justify-content: center; /* center left section horizontally */
+  }
+
+  .Left-part {
+    align-items: center; /* center content */
+    text-align: center; /* center headings and paragraphs */
+    padding: 20px; /* optional padding */
+  }
+
+  h1 {
+    white-space: normal; /* allow heading wrap */
+  }
+
+  p {
+    max-width: 90%; /* adjust paragraph width */
+    margin: 0 auto;
+  }
 }
 
-/* Small screens */
+/* Screens smaller than 900px */
 @media (max-width: 900px) {
+  .Left-part{
+    width: 100%;
+    align-items: center;
+  }
   h1 {
     font-size: 2.2rem;
   }
@@ -134,11 +180,11 @@ p {
   }
 }
 
-/* Mobile screens */
+/* Mobile screens <600px */
 @media (max-width: 600px) {
   .body-container {
     flex-direction: column;
-    padding: 0 10px; /* reduced padding to avoid overflow */
+    padding: 0 10px; /* reduced padding */
     gap: 20px;
   }
 
@@ -147,12 +193,12 @@ p {
     width: 100%;
     align-items: center;
     text-align: center;
-    padding: 10px; /* scale down padding for mobile */
+    padding: 10px;
   }
 
   h1 {
     font-size: 1.8rem;
-    white-space: normal; /* allow wrapping on mobile */
+    white-space: normal;
   }
 
   p {

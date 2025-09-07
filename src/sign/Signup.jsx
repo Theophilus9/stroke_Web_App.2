@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "./firebase";
 import { useNavigate } from "react-router-dom";
-import "./styles/Signupstyle.css"; // import css file
+import "./styles/Signupstyle.css";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // toggle password
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
@@ -18,16 +19,8 @@ const Signup = () => {
     setSuccess("");
 
     try {
-      // Create user with email + password
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      // Update displayName with username
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(userCredential.user, { displayName: username });
-
       setSuccess("✅ Account created successfully! You can now log in.");
       setUsername("");
       setEmail("");
@@ -60,29 +53,32 @@ const Signup = () => {
               required
             />
           </div>
-          <div className="form-group">
+          <div className="form-group password-group">
             <label>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <div className="password-wrapper">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <img
+                src={showPassword ? "/static/show.png" : "/static/hidden.png"}
+                alt="Toggle Password"
+                className="password-toggle"
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            </div>
           </div>
-          <button type="submit" className="signup-btn">
-            Sign Up
-          </button>
+          <button type="submit" className="signup-btn">Sign Up</button>
         </form>
+
         {error && <p className="error-text">{error}</p>}
         {success && <p className="success-text">{success}</p>}
 
-        {/* 👇 Add link to Login */}
         <p className="login-link">
           Already have an account?{" "}
-          <span
-            onClick={() => navigate("/login")}
-            className="link-text"
-          >
+          <span onClick={() => navigate("/login")} className="link-text">
             Login
           </span>
         </p>

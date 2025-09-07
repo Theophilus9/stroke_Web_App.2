@@ -7,6 +7,7 @@ import './styles/Loginstyle.css';
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // new state
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -17,7 +18,7 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert("✅ Logged in successfully!");
-      navigate("/home"); // redirect after login
+      navigate("/home");
     } catch (err) {
       setError(err.message);
     }
@@ -37,22 +38,33 @@ const Login = () => {
               required
             />
           </div>
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
+
+          <div className="form-group password-group">
+  <label>Password</label>
+  <div className="password-wrapper">
+    <input
+      type={showPassword ? "text" : "password"}
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      required
+    />
+    <img
+      src={showPassword ? "/static/show.png" : "/static/hidden.png"}
+      alt="Toggle Password"
+      className="password-toggle"
+      onClick={() => setShowPassword(!showPassword)}
+    />
+  </div>
+</div>
+
+
           <button type="submit" className="login-btn">
             Login
           </button>
         </form>
+
         {error && <p className="error-text">{error}</p>}
 
-        {/* 👇 Add this section */}
         <p className="signup-link">
           Don’t have an account?{" "}
           <span onClick={() => navigate("/signup")} className="link-text">

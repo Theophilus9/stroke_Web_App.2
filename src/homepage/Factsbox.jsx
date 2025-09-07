@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './styles/Factsbox.css';
 
 const facts = [
-    "Strokes can happen at any age, even in children.",
-    "FAST: Face drooping, Arm weakness, Speech difficulty, Time to call emergency.",
-    "Strokes can happen at any age, even in children.",
-    "FAST: Face drooping, Arm weakness, Speech difficulty, Time to call emergency.",
-    "FAST: Face drooping, Arm weakness, Speech difficulty, Time to call emergency."
+  "Stroke is the second leading cause of death worldwide, claiming millions of lives every year.",
+  "About 1 in 4 adults over 25 will experience a stroke in their lifetime, making it a major global health concern.",
+  "Strokes can happen at any age, even in children and young adults, not just the elderly.",
+  "Early recognition of stroke symptoms and immediate medical attention can drastically reduce long-term disability.",
+  "High blood pressure, diabetes, smoking, and poor diet are major risk factors that can often be controlled to prevent stroke.",
+  "Innovative technology and AI can help predict stroke risk, enabling preventive care and better patient outcomes."
 ];
+
 
 const Factsbox = () => {
     const [currentFact, setCurrentFact] = useState(0);
