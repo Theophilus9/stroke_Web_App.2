@@ -23,3 +23,131 @@
   border-radius: 10px;
   border: 1px solid #eee;
 }
+
+.summary-cards {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card {
+  flex: 1;
+  min-width: 120px;
+  padding: 15px;
+  border-radius: 10px;
+  color: #fff;
+  text-align: center;
+}
+
+.card.total {
+  background-color: #4cafef;
+}
+
+.card.average {
+  background-color: #43d9a2;
+}
+
+.card.high-risk {
+  background-color: #f44336;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.card p {
+  margin: 5px 0 0 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.trend-message {
+  margin-top: 15px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.trend-message-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.trend-message-card .trend-icon {
+  font-size: 22px;
+}
+
+.trend-message-card.trend-good {
+  background-color: #e6f9ec;
+  color: #1b7a2e;
+  border-left: 6px solid #28a745;
+}
+
+.trend-message-card.trend-bad {
+  background-color: #fde8e8;
+  color: #a71b1b;
+  border-left: 6px solid #dc3545;
+}
+
+.trend-message-card.trend-neutral {
+  background-color: #f0f4ff;
+  color: #2a3f8e;
+  border-left: 6px solid #3d5afe;
+}
+
+.trend-text {
+  margin: 0;
+}
+
+/* Recommendation Card */
+.recommendation-card {
+  margin-top: 20px;
+  padding: 18px 22px;
+  border-radius: 12px;
+  background: #f8faff;
+  border-left: 6px solid #4a90e2;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  animation: fadeInUp 0.4s ease;
+}
+
+.recommendation-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #4a3aff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recommendation-card p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* subtle animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

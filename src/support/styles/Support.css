@@ -1,150 +1,152 @@
-/* src/homepage/styles/Support.css */
-
-/* General container */
-.support-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0;
-}
-
-/* Content wrapper */
-.support-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;      /* center horizontally */
-  justify-content: flex-start;
-  max-width: 900px;         /* constrain width for readability */
-  width: 100%;
+/*
+  General Styles for the Support Page
+  - Sets a clean, accessible font and a light background.
+*/
+body {
+  background-color: #f4f7f9;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
   padding: 20px;
-  margin: 0 auto;           /* center on screen */
-  box-sizing: border-box;
 }
 
-/* Headings */
-.support-content h1,
-.support-content h2 {
+/*
+  Support Container
+  - Main wrapper for the page content.
+  - Centers the content and provides a maximum width for readability.
+*/
+.support-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/*
+  Title Styling
+  - Styles the main title of the page with a clean, medical-themed color.
+*/
+.support-title {
   text-align: center;
-  color: #292929;
-  line-height: 1.3;
-  margin-bottom: 15px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #007bff; /* A nice, medical blue */
+  margin-bottom: 0px;
+  position: relative;
 }
 
-.support-content h1 {
-  font-size: 2rem;
-  font-weight: bold;
+.support-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: #007bff;
+  margin:0px auto 0;
+  border-radius: 2px;
 }
 
-.support-content h2 {
+/*
+  Sections Layout
+  - Uses a flexible grid layout to arrange the cards.
+  - Cards will wrap onto the next line on smaller screens.
+*/
+.support-sections {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+/*
+  Card Styling
+  - A core component style for each information section.
+  - Adds a subtle shadow, rounded corners, and padding.
+*/
+.support-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  flex: 1 1 45%; /* Allows cards to grow but maintain a base width */
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.support-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.support-card h2 {
   font-size: 1.5rem;
-  font-weight: 600;
-  margin-top: 25px;
-}
-
-/* Paragraphs */
-.support-content p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #333;
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-/* Lists */
-.support-content ul {
-  list-style: disc;
-  padding-left: 20px;
-  margin-bottom: 15px;
-}
-
-.support-content li {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #333;
-}
-
-/* Blockquote */
-.support-content blockquote {
-  font-style: italic;
-  color: #555;
-  text-align: center;
-  margin: 15px 0;
-  border-left: 4px solid #007bff;
-  padding-left: 15px;
-}
-
-/* External link */
-.external-link {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.external-link a {
   color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 10px;
 }
 
-.external-link a:hover {
-  text-decoration: underline;
+.support-card ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* Good luck text */
-.good-luck {
-  font-weight: bold;
+.support-card li {
+  margin-bottom: 15px;
+  padding-left: 25px;
+  position: relative;
+  font-size: 1rem;
+}
+
+/* Adds a custom list marker with a colored circle */
+.support-card li::before {
+  content: '•';
+  color: #007bff;
   font-size: 1.2rem;
-  text-align: center;
-  margin: 20px 0;
+  position: absolute;
+  left: 0;
 }
 
-/* Video responsiveness */
-.support-content iframe {
+/* Video Section Styling */
+.video-card {
+  flex: 1 1 100%; /* Make the video card span the full width */
+}
+
+.video-wrapper {
+  position: relative;
   width: 100%;
-  height: auto;
-  max-width: 800px;
-  aspect-ratio: 16/9;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+  margin-top: 20px;
+  border-radius: 8px;
 }
 
-/* ------------------- Responsive ------------------- */
-
-/* Medium screens */
-@media (max-width: 900px) {
-  .support-content {
-    padding: 15px;
-  }
-
-  .support-content h1 {
-    font-size: 1.8rem;
-  }
-
-  .support-content h2 {
-    font-size: 1.3rem;
-  }
-
-  .support-content p,
-  .support-content li {
-    font-size: 1rem;
-  }
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
 }
 
-/* Mobile screens */
-@media (max-width: 600px) {
-  .support-content {
-    padding: 10px 15px;
+/*
+  Responsive Design
+  - Adjusts layout for screens smaller than 768px (e.g., mobile devices).
+*/
+@media (max-width: 768px) {
+  .support-title {
+    font-size: 2rem;
   }
 
-  .support-content h1 {
-    font-size: 1.5rem;
+  .support-sections {
+    flex-direction: column;
   }
 
-  .support-content h2 {
-    font-size: 1.2rem;
-  }
-
-  .support-content p,
-  .support-content li {
-    font-size: 0.95rem;
+  .support-card {
+    flex: 1 1 100%; /* Cards will take up full width on small screens */
   }
 }

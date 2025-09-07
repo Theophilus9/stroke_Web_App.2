@@ -1,0 +1,171 @@
+/* * Quiz Game Styles
+ * These styles have been updated for a bigger, more prominent look.
+ */
+/* Body and Main Container Styles */
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.quiz-container-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f3f4f6;
+  padding: 0rem;
+}
+
+/* Quiz Card */
+.quiz-card {
+  width: 100%;
+  max-width: 42rem;
+  background-color: #ffffff;
+  border-radius: 0.75rem; /* rounded-xl */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+  padding: 2rem;
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+.quiz-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* hover:shadow-2xl */
+}
+
+/* Header and Text */
+.quiz-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quiz-title {
+  font-size: 2.25rem; /* text-4xl */
+  font-weight: 800; /* font-extrabold */
+  color: #2563eb; /* text-blue-600 */
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.quiz-subtitle {
+  color: #4b5563; /* text-gray-600 */
+  margin-bottom: 2rem; /* mb-8 */
+  text-align: center;
+  max-width: 28rem; /* max-w-md */
+}
+
+/* Progress Bar */
+.progress-section {
+  width: 100%;
+  margin-bottom: 1.5rem; /* mb-6 */
+}
+
+.progress-text {
+  font-size: 1.125rem; /* text-lg */
+  color: #6b7280; /* text-gray-500 */
+  margin-bottom: 0.5rem; /* mb-2 */
+  text-align: center;
+}
+
+.progress-bar-track {
+  background-color: #e5e7eb; /* bg-gray-200 */
+  height: 0.5rem; /* h-2 */
+  border-radius: 9999px; /* rounded-full */
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #3b82f6; /* bg-blue-500 */
+  transition: width 0.3s ease;
+}
+
+/* Question and Answer Sections */
+.question-section {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 2rem; /* mb-8 */
+}
+
+.question-text {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 600; /* font-semibold */
+  color: #1f2937; /* text-gray-800 */
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+.answer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem; /* gap-4 */
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .answer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.answer-button {
+  width: 100%;
+  text-align: left;
+  background-color: #e5e7eb; /* bg-gray-200 */
+  transition: all 0.3s ease;
+  font-weight: 500; /* font-medium */
+  padding: 1rem 1.5rem; /* py-4 px-6 */
+  border-radius: 0.5rem; /* rounded-lg */
+  color: #1f2937; /* text-gray-800 */
+  border: none;
+  cursor: pointer;
+}
+
+.answer-button:hover {
+  background-color: #3b82f6; /* hover:bg-blue-500 */
+  color: #ffffff; /* hover:text-white */
+}
+
+/* Feedback Message */
+.feedback-message {
+  margin-top: 1.5rem; /* mt-6 */
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 700; /* font-bold */
+}
+
+.feedback-correct {
+  color: #16a34a; /* text-green-600 */
+}
+
+.feedback-incorrect {
+  color: #dc2626; /* text-red-600 */
+}
+
+/* Restart Button Styles */
+.restart-button {
+    margin-top: 1.5rem;
+    padding: 0.75rem 2rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ffffff;
+    border-radius: 9999px; /* rounded-full */
+    border: none;
+    cursor: pointer;
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.restart-button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.quiz-score {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
