@@ -1,11 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./styles/chat.css";
 
+const RULES = [
+  { keywords: ["hello", "hi", "hey", "greetings"], response: "Hello! Welcome to the stroke support chatbot. I can provide information on common stroke-related topics. How can I help you today?" },
+  { keywords: ["what is a stroke", "stroke definition"], response: "A stroke occurs when the blood supply to part of your brain is interrupted, preventing brain tissue from getting oxygen and nutrients. This can cause brain cells to die." },
+  { keywords: ["symptoms", "signs of a stroke", "fast test", "what are the symptoms"], response: "The FAST test is a simple way to remember the key signs of a stroke: \n\n**F** - Face drooping: Is one side of the face numb or drooping?\n**A** - Arm weakness: Is one arm weak or numb?\n**S** - Speech difficulty: Is speech slurred or difficult to understand?\n**T** - Time to call emergency services. If you notice any of these signs, call for help immediately." },
+  { keywords: ["stroke recovery", "rehabilitation", "rehab", "recovering"], response: "Stroke recovery is a process that can take time. Rehabilitation often includes physical therapy, occupational therapy, and speech therapy to help you regain skills and independence." },
+  { keywords: ["emotional support", "feeling sad", "depressed after stroke"], response: "It's common to experience a range of emotions after a stroke. Talking to a professional or a support group can be very helpful. Please consider reaching out to a support service for guidance." },
+  { keywords: ["resources", "support groups", "help"], response: "You can find a variety of resources and support groups online and in your local community. Organizations like the American Stroke Association and the National Stroke Association offer extensive information and support networks." },
+  { keywords: [], response: "I'm sorry, I couldn't find an answer for that. Please try rephrasing your question or ask about one of these topics: **symptoms**, **recovery**, or **resources**." },
+];
+
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
   const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
   const toggleChat = () => setIsOpen(!isOpen);
@@ -14,78 +23,20 @@ const ChatBot = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatHistory]);
 
-  const generateBotResponse = async (currentHistory) => {
-    try {
-      const formattedHistory = currentHistory.map(({ role, text }) => ({
-        role,
-        parts: [{ text }],
-      }));
-
-      const response = await fetch(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Goog-Api-Key": import.meta.env.VITE_GEMINI_API_KEY,
-          },
-          body: JSON.stringify({ contents: formattedHistory }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error?.message || "Something went wrong!");
-      }
-
-      const botText = data.candidates[0].contents.parts[0].text
-        .replace(/\^(\^.*?)\^(\^*)/g, "$1")
-        .trim();
-
-      // Update chat history
-      setChatHistory((prev) =>
-        prev.map((msg) =>
-          msg.text === "thinking ..." && msg.role === "bot"
-            ? { ...msg, text: botText }
-            : msg
-        )
-      );
-    } catch (error) {
-      console.error(error);
-      setChatHistory((prev) =>
-        prev.map((msg) =>
-          msg.text === "thinking ..." && msg.role === "bot"
-            ? {
-                ...msg,
-                text:
-                  "Sorry, I'm having trouble connecting right now. Please try again later.",
-              }
-            : msg
-        )
-      );
-    } finally {
-      setLoading(false);
+  const getBotResponse = (userMessage) => {
+    const normalizedInput = userMessage.toLowerCase();
+    for (const rule of RULES) {
+      if (rule.keywords.some(keyword => normalizedInput.includes(keyword))) return rule.response;
     }
+    return RULES.find(rule => rule.keywords.length === 0).response;
   };
 
   const handleSend = () => {
-    if (!input.trim() || loading) return;
-
+    if (!input.trim()) return;
     const userMessage = input.trim();
-
-    // Add user message and bot placeholder
-    setChatHistory((prev) => [
-      ...prev,
-      { role: "user", text: userMessage },
-      { role: "bot", text: "thinking ..." },
-    ]);
-
+    const botResponse = getBotResponse(userMessage);
+    setChatHistory(prev => [...prev, { role: "user", text: userMessage }, { role: "bot", text: botResponse }]);
     setInput("");
-    setLoading(true);
-
-    // Call API with the latest history
-    generateBotResponse([...chatHistory, { role: "user", text: userMessage }]);
   };
 
   const handleKeyPress = (e) => {
@@ -93,45 +44,34 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="chatbot-container">
-      <div className={`chatbot-toggle ${isOpen ? "open" : ""}`} onClick={toggleChat}>
-        {isOpen ? "×" : "💬"}
-      </div>
+    <div className="chat-container">
+      <div className="chat-toggle-btn" onClick={toggleChat}>{isOpen ? "×" : "💬"}</div>
 
       {isOpen && (
-        <div className="chatbot-window">
-          <div className="chatbot-header">
-            <h3>Gemini Assistant</h3>
-            <button className="close-btn" onClick={toggleChat}>
-              ×
-            </button>
+        <div className="chat-window">
+          <div className="chat-header">
+            Stroke Assistant
+            <button onClick={toggleChat}>×</button>
           </div>
 
-          <div className="chatbot-messages">
+          <div className="chat-messages">
             {chatHistory.map((msg, idx) => (
-              <div key={idx} className={`chatbot-message ${msg.role}`}>
-                <div className="message-content">
-                  {msg.role === "bot" && <div className="bot-avatar">AI</div>}
-                  <div className="message-text">{msg.text}</div>
-                </div>
-              </div>
+              <div key={idx} className={`message ${msg.role}`}>{msg.text}</div>
             ))}
-
             <div ref={messagesEndRef}></div>
           </div>
 
-          <div className="chatbot-input">
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder={loading ? "Waiting for response..." : "Type your message..."}
-              disabled={loading}
-            />
-            <button onClick={handleSend} disabled={loading}>
-              {loading ? "⏳" : "↑"}
-            </button>
+          <div className="chat-input-container">
+            <div className="chat-input-wrapper">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Ask me a question..."
+              />
+              <button onClick={handleSend}>↑</button>
+            </div>
           </div>
         </div>
       )}

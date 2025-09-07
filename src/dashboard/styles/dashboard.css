@@ -1,153 +1,188 @@
-.dashboard-container {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-}
+/* ./styles/dashboard.css */
 
-.dashboard-title {
-  text-align: center;
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 20px;
+/* General Body and Container Styles */
+.dashboard-container {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background-color: #f4f7fa; /* Light grey background for the whole page */
+  min-height: 100vh;
   color: #333;
 }
 
-.chart-wrapper {
-  width: 100%;
-  height: 400px;
-  padding: 15px;
-  background: #fafafa;
-  border-radius: 10px;
-  border: 1px solid #eee;
+.dashboard-body {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
+.dashboard-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c3e50; /* Dark blue-grey for titles */
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* --- Summary Cards Section --- */
 .summary-cards {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .card {
-  flex: 1;
-  min-width: 120px;
-  padding: 15px;
-  border-radius: 10px;
-  color: #fff;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   text-align: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.card.total {
-  background-color: #4cafef;
-}
-
-.card.average {
-  background-color: #43d9a2;
-}
-
-.card.high-risk {
-  background-color: #f44336;
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .card h3 {
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
   font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .card p {
-  margin: 5px 0 0 0;
-  font-size: 1.5rem;
-  font-weight: bold;
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
 
-.trend-message {
-  margin-top: 15px;
-  font-size: 1.1rem;
-  font-weight: 500;
-  text-align: center;
+/* Specific colors for card values */
+.card.total p {
+  color: #3498db; /* Blue */
+}
+.card.average p {
+  color: #2ecc71; /* Green */
+}
+.card.high-risk p {
+  color: #e74c3c; /* Red */
 }
 
+/* --- Chart Wrapper --- */
+.chart-wrapper {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  height: 450px; /* Essential for ResponsiveContainer to work correctly */
+  margin-bottom: 2rem;
+}
+
+/* --- Trend Message Card --- */
 .trend-message-card {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-  padding: 15px 20px;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 500;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.trend-message-card .trend-icon {
-  font-size: 22px;
-}
-
-.trend-message-card.trend-good {
-  background-color: #e6f9ec;
-  color: #1b7a2e;
-  border-left: 6px solid #28a745;
-}
-
-.trend-message-card.trend-bad {
-  background-color: #fde8e8;
-  color: #a71b1b;
-  border-left: 6px solid #dc3545;
-}
-
-.trend-message-card.trend-neutral {
-  background-color: #f0f4ff;
-  color: #2a3f8e;
-  border-left: 6px solid #3d5afe;
+.trend-icon {
+  font-size: 1.5rem;
+  margin-right: 1rem;
 }
 
 .trend-text {
   margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
-/* Recommendation Card */
+/* Variants for trend messages based on sentiment */
+.trend-message-card.trend-good {
+  background-color: #e8f5e9; /* Light green */
+  border-color: #a5d6a7;
+  color: #2e7d32;
+}
+
+.trend-message-card.trend-bad {
+  background-color: #ffebf1; /* Light red/pink */
+  border-color: #ef9a9a;
+  color: #c62828;
+}
+
+.trend-message-card.trend-neutral {
+  background-color: #e3f2fd; /* Light blue */
+  border-color: #90caf9;
+  color: #1565c0;
+}
+
+
+/* --- Recommendation Card --- */
 .recommendation-card {
-  margin-top: 20px;
-  padding: 18px 22px;
+  background-color: #fff;
+  padding: 1.5rem 2rem;
   border-radius: 12px;
-  background: #f8faff;
-  border-left: 6px solid #4a90e2;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-  animation: fadeInUp 0.4s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-left: 5px solid #683ddf; /* Accent color from the chart's main line */
 }
 
 .recommendation-card h3 {
-  margin: 0 0 10px;
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #4a3aff;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: #2c3e50;
+}
+
+.recommendation-card ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.recommendation-card li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+  color: #444;
   display: flex;
   align-items: center;
-  gap: 8px;
 }
 
-.recommendation-card p {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #444;
+.recommendation-card li:last-child {
+  border-bottom: none;
 }
 
-/* subtle animation */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
+.recommendation-card li::before {
+  content: '✓';
+  color: #2ecc71; /* Green checkmark */
+  font-weight: bold;
+  margin-right: 0.75rem;
+  font-size: 1.1rem;
+}
+
+
+/* --- Responsive Design for smaller screens --- */
+@media (max-width: 768px) {
+  .dashboard-body {
+    padding: 1rem;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .dashboard-title {
+    font-size: 1.5rem;
+  }
+
+  .summary-cards {
+    grid-template-columns: 1fr; /* Stack cards vertically */
+    gap: 1rem;
+  }
+
+  .chart-wrapper {
+    height: 300px; /* Adjust chart height for mobile */
+    padding: 1rem;
   }
 }
