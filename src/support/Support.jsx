@@ -1,6 +1,6 @@
 import React from "react";
-import "./styles/support.css";
-import ChatBot from "./ChatBot";
+import "./styles/Support.css";
+import ChatBot from "./Chatbot";
 import Fungame from "./Fungame";
 
 const Support = () => {
