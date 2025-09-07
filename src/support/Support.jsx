@@ -7,7 +7,7 @@ const Support = () => {
   return (
     <div className="support-container">
       <h1 className="support-title">🩺 Stroke Support & Education</h1>
-      <div>
+      <div className="quiz-section">
       <Fungame />
       </div>
       <div className="support-sections">

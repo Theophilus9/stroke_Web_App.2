@@ -16,10 +16,15 @@ body {
   - Main wrapper for the page content.
   - Centers the content and provides a maximum width for readability.
 */
+.quiz-section {
+   padding: 30px;
+}
+
 .support-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  margin-top: 40px;
 }
 
 /*
@@ -149,6 +154,6 @@ body {
 
   .support-card {
     flex: 1 1 100%; /* Cards will take up full width on small screens */
-    margin-top: 20px;
+    margin-top: 30px;
   }
 }
