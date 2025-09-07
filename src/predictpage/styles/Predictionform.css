@@ -1,3 +1,6 @@
+.prediction-form{
+  padding: 10px 0px;
+}
 /* Overall Form Styling */
 .prediction-form form {
   display: flex;
