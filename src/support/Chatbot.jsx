@@ -3,9 +3,7 @@ import "./styles/chat.css";
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    { from: "bot", text: "Hello! How can I help you today?" }
-  ]);
+  const [chatHistory, setChatHistory] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
@@ -14,66 +12,80 @@ const ChatBot = () => {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [chatHistory]);
 
-  const handleSend = async () => {
-    if (!input.trim() || loading) return;
-
-    console.log("Sending message:", input);
-    setMessages(prev => [...prev, { from: "user", text: input }]);
-    setLoading(true);
-
+  const generateBotResponse = async (currentHistory) => {
     try {
-      const token = import.meta.env.VITE_HF_TOKEN;
-      console.log("Using Hugging Face token:", token ? "FOUND" : "MISSING");
-      const model = "google/flan-t5-small";
-      console.log("Sending request to model:", model);
-
-      // Timeout controller to prevent hanging
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 10000);
+      const formattedHistory = currentHistory.map(({ role, text }) => ({
+        role,
+        parts: [{ text }],
+      }));
 
       const response = await fetch(
-        `https://api-inference.huggingface.co/models/${model}`,
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
         {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "X-Goog-Api-Key": import.meta.env.VITE_GEMINI_API_KEY,
           },
-          body: JSON.stringify({
-            inputs: `User: ${input}\nAssistant:`,
-            parameters: { max_new_tokens: 150 }
-          }),
-          signal: controller.signal
+          body: JSON.stringify({ contents: formattedHistory }),
         }
       );
 
-      clearTimeout(timeout);
-
-      if (!response.ok) throw new Error(`API error: ${response.status}`);
       const data = await response.json();
-      console.log("Raw HF response:", data);
 
-      let botReply = "Sorry, I didn't understand that.";
-      if (Array.isArray(data) && data[0]?.generated_text) {
-        botReply = data[0].generated_text;
-      } else if (data?.generated_text) {
-        botReply = data.generated_text;
+      if (!response.ok) {
+        throw new Error(data.error?.message || "Something went wrong!");
       }
 
-      setMessages(prev => [...prev, { from: "bot", text: botReply }]);
-      console.log("Bot reply:", botReply);
-    } catch (err) {
-      console.error("Error fetching from Hugging Face:", err);
-      setMessages(prev => [
-        ...prev,
-        { from: "bot", text: "Sorry, I'm having trouble connecting to AI right now." }
-      ]);
+      const botText = data.candidates[0].contents.parts[0].text
+        .replace(/\^(\^.*?)\^(\^*)/g, "$1")
+        .trim();
+
+      // Update chat history
+      setChatHistory((prev) =>
+        prev.map((msg) =>
+          msg.text === "thinking ..." && msg.role === "bot"
+            ? { ...msg, text: botText }
+            : msg
+        )
+      );
+    } catch (error) {
+      console.error(error);
+      setChatHistory((prev) =>
+        prev.map((msg) =>
+          msg.text === "thinking ..." && msg.role === "bot"
+            ? {
+                ...msg,
+                text:
+                  "Sorry, I'm having trouble connecting right now. Please try again later.",
+              }
+            : msg
+        )
+      );
     } finally {
       setLoading(false);
-      setInput("");
     }
+  };
+
+  const handleSend = () => {
+    if (!input.trim() || loading) return;
+
+    const userMessage = input.trim();
+
+    // Add user message and bot placeholder
+    setChatHistory((prev) => [
+      ...prev,
+      { role: "user", text: userMessage },
+      { role: "bot", text: "thinking ..." },
+    ]);
+
+    setInput("");
+    setLoading(true);
+
+    // Call API with the latest history
+    generateBotResponse([...chatHistory, { role: "user", text: userMessage }]);
   };
 
   const handleKeyPress = (e) => {
@@ -85,28 +97,40 @@ const ChatBot = () => {
       <div className={`chatbot-toggle ${isOpen ? "open" : ""}`} onClick={toggleChat}>
         {isOpen ? "×" : "💬"}
       </div>
+
       {isOpen && (
         <div className="chatbot-window">
+          <div className="chatbot-header">
+            <h3>Gemini Assistant</h3>
+            <button className="close-btn" onClick={toggleChat}>
+              ×
+            </button>
+          </div>
+
           <div className="chatbot-messages">
-            {messages.map((msg, idx) => (
-              <div key={idx} className={`chatbot-message ${msg.from}`}>
-                {msg.text}
+            {chatHistory.map((msg, idx) => (
+              <div key={idx} className={`chatbot-message ${msg.role}`}>
+                <div className="message-content">
+                  {msg.role === "bot" && <div className="bot-avatar">AI</div>}
+                  <div className="message-text">{msg.text}</div>
+                </div>
               </div>
             ))}
-            {loading && <div className="chatbot-message bot">...</div>}
+
             <div ref={messagesEndRef}></div>
           </div>
+
           <div className="chatbot-input">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder={loading ? "Thinking..." : "Type your message..."}
+              placeholder={loading ? "Waiting for response..." : "Type your message..."}
               disabled={loading}
             />
             <button onClick={handleSend} disabled={loading}>
-              Send
+              {loading ? "⏳" : "↑"}
             </button>
           </div>
         </div>
