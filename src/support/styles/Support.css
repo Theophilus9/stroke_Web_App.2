@@ -94,6 +94,7 @@ body {
 }
 
 .support-card li {
+  margin-top: 5px;
   margin-bottom: 15px;
   padding-left: 25px;
   position: relative;
@@ -148,5 +149,6 @@ body {
 
   .support-card {
     flex: 1 1 100%; /* Cards will take up full width on small screens */
+    margin-top: 20px;
   }
 }
